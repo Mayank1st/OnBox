@@ -1,8 +1,4 @@
-Below is a template for your `README.md` file that you can include in your GitHub repository. This file will help guide anyone reviewing your project through the setup process, project structure, and your deployment links. You can customize the specific parts based on your project.
-
----
-
-# Project Title
+# OnBox
 
 This is a [brief description of your project]. This application was created as part of [assignment, project, or task] and includes both frontend and backend functionality.
 
