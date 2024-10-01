@@ -21,8 +21,8 @@ This application allows users to [brief explanation of what the app does, e.g., 
 
 ## Deployed Links
 
-- **Frontend Link**: [Frontend Deployed Link](https://frontend-link.com)  
-- **Backend Link**: [Backend Deployed Link](https://backend-link.com)
+- **Frontend Link**: [Frontend Deployed Link](http://localhost:3000/)  
+- **Backend Link**: [Backend Deployed Link](http://localhost:8000)
 
 ## Technologies Used
 
@@ -52,7 +52,7 @@ This application allows users to [brief explanation of what the app does, e.g., 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/Mayank1st/OnBox.git
    cd your-repo
    ```
 
@@ -79,7 +79,7 @@ This application allows users to [brief explanation of what the app does, e.g., 
    - For the backend, create a `.env` file in the root of the backend directory and add your environment variables:
 
      ```
-     PORT=5000
+     PORT=8000
      MONGO_URI=your-mongodb-connection-string
      JWT_SECRET=your-jwt-secret
      ```
