@@ -126,7 +126,7 @@ class UserController {
         return res.status(404).json({ status: "failed", message: "Invalid Email or Password" });
       }
 
-      // Check if user verified
+      // Check if user exists
       if (!user.is_verified) {
         return res.status(401).json({ status: "failed", message: "Your account is not verified" });
       }

@@ -1,9 +1,14 @@
-import React from 'react'
+import { Heading } from "@chakra-ui/react";
+import React from "react";
 
 function Footer() {
   return (
-    <div>Footer</div>
-  )
+    <div className="footer-main-div">
+      <Heading className="text-content-footer" textAlign={"center"}>
+        © 2023 Planaire. All rights reserved.
+      </Heading>
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;

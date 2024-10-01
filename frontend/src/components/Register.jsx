@@ -5,23 +5,28 @@ import {
   Box,
   Button,
   Flex,
-  Stack,
   Heading,
   Text,
-  Link,
   useColorModeValue,
   Image,
   VStack,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export default function Register() {
   const bg = useColorModeValue("gray.100", "gray.900");
   const boxBg = useColorModeValue("white", "gray.700");
   const textColor = useColorModeValue("gray.800", "gray.100");
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleGoogleSignUp = () => {
+    // Redirect directly to the backend Google auth endpoint
+    window.location.href = "http://localhost:8000/auth/google";
+  };
 
   return (
     <Flex
-      minH={"100vh"}
+      minH={"80vh"}
       align={"center"}
       justify={"center"}
       bg={bg}
@@ -51,6 +56,7 @@ export default function Register() {
                 boxSize={5}
               />
             }
+            onClick={handleGoogleSignUp} // Directly redirect to backend Google auth route
           >
             Sign up with Google
           </Button>
@@ -65,9 +71,14 @@ export default function Register() {
 
           <Text color={textColor}>
             Already have an account?{" "}
-            <Link href="/login" color={"blue.400"}>
+            <Text
+              as="span"
+              color={"blue.400"}
+              onClick={() => navigate("/login")}
+              style={{ cursor: "pointer" }}
+            >
               Sign In
-            </Link>
+            </Text>
           </Text>
         </VStack>
       </Box>

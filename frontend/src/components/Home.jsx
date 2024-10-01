@@ -23,11 +23,12 @@ import {
 import { AiOutlineHome, AiOutlineSearch, AiOutlineInbox } from "react-icons/ai";
 import { BsFillEnvelopeFill, BsSend } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
-import { RiFlashlightFill } from "react-icons/ri";
 import { FaMoon, FaSun } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import Cookies from "js-cookie"; // Assuming you're using js-cookie
 import Inbox from "./Inbox";
-import Main_div_logo from "../assets/Main_div_logo.png"
+import Main_div_logo from "../assets/Main_div_logo.png";
 
 export default function Index() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -76,6 +77,13 @@ export default function Index() {
           <Box>
             <Heading>Dashboard</Heading>
             <Text>Welcome to the Dashboard!</Text>
+          </Box>
+        );
+      case "Login":
+        return (
+          <Box>
+            <Heading>Login</Heading>
+            <Text>Please login to access your account.</Text>
           </Box>
         );
       default:
@@ -161,117 +169,117 @@ export default function Index() {
   );
 }
 
-const SidebarContent = ({ setActiveSection, ...props }) => (
-  <Box
-    as="nav"
-    pos="fixed"
-    top="0"
-    left="0"
-    zIndex="sticky"
-    h="full"
-    overflowX="hidden"
-    overflowY="auto"
-    bg={useColorModeValue("white", "gray.800")}
-    borderColor={useColorModeValue("inherit", "gray.700")}
-    borderRightWidth="1px"
-    w="16" // Set width for collapsed sidebar
-    {...props}
-  >
-    <VStack
+const SidebarContent = ({ setActiveSection, ...props }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Check the auth status when the component mounts
+  useEffect(() => {
+    const isAuth = Cookies.get("is_auth"); // Retrieve the is_auth cookie
+    if (isAuth) {
+      setIsAuthenticated(true); // Set authentication state
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Clear cookies on logout
+    Cookies.remove("is_auth");
+    Cookies.remove("refreshToken");
+    Cookies.remove("accessTokenExp");
+    setIsAuthenticated(false); // Update state after logout
+    navigate('/'); // Navigate to home page
+  };
+
+  return (
+    <Box
+      as="nav"
+      pos="fixed"
+      top="0"
+      left="0"
+      zIndex="sticky"
       h="full"
-      w="full"
-      alignItems="flex-start"
-      justifyContent="space-between"
+      overflowX="hidden"
+      overflowY="auto"
+      bg={useColorModeValue("white", "gray.800")}
+      borderColor={useColorModeValue("inherit", "gray.700")}
+      borderRightWidth="1px"
+      w="16" // Set width for collapsed sidebar
+      {...props}
     >
-      <Box w="full">
-        <Flex px="4" py="5" align="center">
-          {/* <Icon as={RiFlashlightFill} h={8} w={8} /> */}
-          <img src={Main_div_logo} class="img-fluid" alt="..." />
-          <Text
-            fontSize="2xl"
-            ml="2"
-            color={useColorModeValue("brand.500", "white")}
-            fontWeight="semibold"
-            display="none" // Always hide the title in collapsed mode
+      <VStack
+        h="full"
+        w="full"
+        alignItems="flex-start"
+        justifyContent="space-between"
+      >
+        <Box w="full">
+          <Flex px="4" py="5" align="center">
+            <img src={Main_div_logo} className="img-fluid" alt="Logo" />
+            <Text
+              fontSize="2xl"
+              ml="2"
+              color={useColorModeValue("brand.500", "white")}
+              fontWeight="semibold"
+              display="none" // Always hide the title in collapsed mode
+            >
+              POS
+            </Text>
+          </Flex>
+          <Flex
+            direction="column"
+            as="nav"
+            fontSize="md"
+            color="gray.600"
+            aria-label="Main Navigation"
           >
-            POS
-          </Text>
-        </Flex>
-        <Flex
-          direction="column"
-          as="nav"
-          fontSize="md"
-          color="gray.600"
-          aria-label="Main Navigation"
-        >
-          <NavItem
-            icon={AiOutlineHome}
-            onClick={() => setActiveSection("Home")}
-          >
-            Home
-          </NavItem>
-          <NavItem
-            icon={AiOutlineSearch}
-            onClick={() => setActiveSection("Search")}
-          >
-            Search
-          </NavItem>
-          <NavItem
-            icon={BsFillEnvelopeFill}
-            onClick={() => setActiveSection("Messages")}
-          >
-            Messages
-          </NavItem>
-          <NavItem icon={BsSend} onClick={() => setActiveSection("Send")}>
-            Send
-          </NavItem>
-          <NavItem
-            icon={AiOutlineInbox}
-            onClick={() => setActiveSection("Inbox")}
-          >
-            Inbox
-          </NavItem>
-          <NavItem
-            icon={AiOutlineHome}
-            onClick={() => setActiveSection("Dashboard")}
-          >
-            Dashboard
-          </NavItem>
-        </Flex>
-      </Box>
+            <NavItem icon={AiOutlineHome} onClick={() => setActiveSection("Home")} />
+            <NavItem icon={AiOutlineSearch} onClick={() => setActiveSection("Search")} />
+            <NavItem icon={BsFillEnvelopeFill} onClick={() => setActiveSection("Messages")} />
+            <NavItem icon={BsSend} onClick={() => setActiveSection("Send")} />
+            <NavItem icon={AiOutlineInbox} onClick={() => setActiveSection("Inbox")} />
+            <NavItem icon={AiOutlineHome} onClick={() => setActiveSection("Dashboard")} />
+          </Flex>
+        </Box>
 
-      <Flex px="4" py="5" mt={10} justifyContent="center" alignItems="center">
-        <Menu>
-          <MenuButton
-            as={Button}
-            size="sm"
-            rounded="full"
-            variant="link"
-            cursor="pointer"
-            _hover={{ textDecoration: "none" }}
-          >
-            <Avatar
-              size="sm"
-              name="Ahmad"
-              src="https://avatars2.githubusercontent.com/u/37842853?v=4"
-            />
-          </MenuButton>
-          <MenuList fontSize={17} zIndex={5555}>
-            <MenuItem as={Link} to="#">
-              My profile
-            </MenuItem>
-            <MenuItem as={Link} to="#">
-              Change password
-            </MenuItem>
-            <MenuItem>Logout</MenuItem>
-          </MenuList>
-        </Menu>
-      </Flex>
-    </VStack>
-  </Box>
-);
+        <Flex px="4" py="5" mt={10} justifyContent="center" alignItems="center" zIndex={10}>
+          {isAuthenticated ? (
+            <Menu>
+              <MenuButton
+                as={Button}
+                size="sm"
+                rounded="full"
+                variant="link"
+                cursor="pointer"
+                _hover={{ textDecoration: "none" }}
+              >
+                <Avatar
+                  size="sm"
+                  name="Ahmad"
+                  src="https://avatars2.githubusercontent.com/u/37842853?v=4"
+                />
+              </MenuButton>
+              <MenuList fontSize={17} zIndex={5555}>
+                <MenuItem as={Link} to="#">
+                  My profile
+                </MenuItem>
+                <MenuItem as={Link} to="#">
+                  Change password
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <Button size="sm" onClick={() => setActiveSection("Login")}>
+              Login
+            </Button>
+          )}
+        </Flex>
+      </VStack>
+    </Box>
+  );
+};
 
-const NavItem = ({ icon, children, onClick }) => {
+const NavItem = ({ icon, onClick }) => {
   const color = useColorModeValue("gray.600", "gray.300");
   return (
     <Flex
@@ -289,18 +297,7 @@ const NavItem = ({ icon, children, onClick }) => {
       }}
       onClick={onClick}
     >
-      {icon && (
-        <Icon
-          mx="2"
-          boxSize="4"
-          _groupHover={{
-            color: color,
-          }}
-          as={icon}
-        />
-      )}
-      <Text display="none">{children}</Text>{" "}
-      {/* Always hide text in collapsed mode */}
+      <Icon as={icon} mr="4" boxSize="5" />
     </Flex>
   );
 };
