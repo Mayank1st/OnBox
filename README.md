@@ -107,7 +107,7 @@ This application allows users to [brief explanation of what the app does, e.g., 
 7. **Visit the application locally**
 
    - Frontend: `http://localhost:3000`
-   - Backend: `http://localhost:5000`
+   - Backend: `http://localhost:8000`
 
 ## API Documentation
 
