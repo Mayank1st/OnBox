@@ -7,6 +7,7 @@ import VerifyEmail from "../components/VerifyEmail";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Error from "../components/Error";
+import Profile from "../components/Profile";
 
 function AllRoutes() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function AllRoutes() {
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/error" element={<Error />} />
       </Routes>
       {showHeaderFooter && <Footer />}

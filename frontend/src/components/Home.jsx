@@ -184,10 +184,11 @@ const SidebarContent = ({ setActiveSection, ...props }) => {
   const handleLogout = () => {
     // Clear cookies on logout
     Cookies.remove("is_auth");
+    localStorage.clear("is_auth");
     Cookies.remove("refreshToken");
     Cookies.remove("accessTokenExp");
     setIsAuthenticated(false); // Update state after logout
-    navigate('/'); // Navigate to home page
+    navigate("/"); // Navigate to home page
   };
 
   return (
@@ -232,16 +233,38 @@ const SidebarContent = ({ setActiveSection, ...props }) => {
             color="gray.600"
             aria-label="Main Navigation"
           >
-            <NavItem icon={AiOutlineHome} onClick={() => setActiveSection("Home")} />
-            <NavItem icon={AiOutlineSearch} onClick={() => setActiveSection("Search")} />
-            <NavItem icon={BsFillEnvelopeFill} onClick={() => setActiveSection("Messages")} />
+            <NavItem
+              icon={AiOutlineHome}
+              onClick={() => setActiveSection("Home")}
+            />
+            <NavItem
+              icon={AiOutlineSearch}
+              onClick={() => setActiveSection("Search")}
+            />
+            <NavItem
+              icon={BsFillEnvelopeFill}
+              onClick={() => setActiveSection("Messages")}
+            />
             <NavItem icon={BsSend} onClick={() => setActiveSection("Send")} />
-            <NavItem icon={AiOutlineInbox} onClick={() => setActiveSection("Inbox")} />
-            <NavItem icon={AiOutlineHome} onClick={() => setActiveSection("Dashboard")} />
+            <NavItem
+              icon={AiOutlineInbox}
+              onClick={() => setActiveSection("Inbox")}
+            />
+            <NavItem
+              icon={AiOutlineHome}
+              onClick={() => setActiveSection("Dashboard")}
+            />
           </Flex>
         </Box>
 
-        <Flex px="4" py="5" mt={10} justifyContent="center" alignItems="center" zIndex={10}>
+        <Flex
+          px="4"
+          py="5"
+          mt={10}
+          justifyContent="center"
+          alignItems="center"
+          zIndex={10}
+        >
           {isAuthenticated ? (
             <Menu>
               <MenuButton

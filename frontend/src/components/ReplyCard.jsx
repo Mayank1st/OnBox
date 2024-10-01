@@ -53,7 +53,6 @@ function ReplyCard({ selectedMessage }) {
           <Input
             placeholder="Recipient's email"
             value={selectedMessage.to} // Use the recipient's email from the selected message
-            isReadOnly // Make it read-only if desired
           />
           <Text fontWeight="bold" mt={4}>
             From:
@@ -61,7 +60,6 @@ function ReplyCard({ selectedMessage }) {
           <Input
             placeholder="Your email"
             value={selectedMessage.sender} // Use the sender's email from the selected message
-            isReadOnly // Make it read-only if desired
           />
           <Text fontWeight="bold" mt={4}>
             Subject:
@@ -69,13 +67,12 @@ function ReplyCard({ selectedMessage }) {
           <Input
             placeholder="Email Subject"
             value={selectedMessage.subject} // Use the subject from the selected message
-            isReadOnly // Make it read-only if desired
           />
           <Text fontWeight="bold" mt={4}>
             Message:
           </Text>
           <Textarea
-            placeholder="Type your message here..."
+            placeholder=""
             value={replyContent}
             onChange={(e) => setReplyContent(e.target.value)} // Update reply content state
             size="sm"

@@ -12,6 +12,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import axiosInstance from "../utils/axiosInstance";
 
 export default function Register() {
   const bg = useColorModeValue("gray.100", "gray.900");
@@ -19,19 +20,25 @@ export default function Register() {
   const textColor = useColorModeValue("gray.800", "gray.100");
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleGoogleSignUp = () => {
+  const handleGoogleSignUp = async () => {
     // Redirect directly to the backend Google auth endpoint
     window.location.href = "http://localhost:8000/auth/google";
   };
 
+  const fetchUserData = async () => {
+    try {
+      const response = await axiosInstance.get("/me"); // Fetch user data
+      console.log("User Data:", response.data); // Log the user data
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  // You can call fetchUserData here if the user is redirected back after login
+  // (e.g., use a useEffect with a dependency on an authentication state)
+
   return (
-    <Flex
-      minH={"80vh"}
-      align={"center"}
-      justify={"center"}
-      bg={bg}
-      p={6}
-    >
+    <Flex minH={"80vh"} align={"center"} justify={"center"} bg={bg} p={6}>
       <Box
         maxW={"lg"}
         w={"full"}
@@ -61,11 +68,7 @@ export default function Register() {
             Sign up with Google
           </Button>
 
-          <Button
-            w={"full"}
-            colorScheme={"blue"}
-            type="submit"
-          >
+          <Button w={"full"} colorScheme={"blue"} type="submit">
             Create an account
           </Button>
 
