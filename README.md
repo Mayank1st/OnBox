@@ -21,8 +21,8 @@ This application allows users to [brief explanation of what the app does, e.g., 
 
 ## Deployed Links
 
-- **Frontend Link**: [Frontend Deployed Link](http://localhost:3000/)  
-- **Backend Link**: [Backend Deployed Link](http://localhost:8000)
+- **Frontend Link**: [Frontend Deployed Link](https://on-mail-app.netlify.app/)  
+- **Backend Link**: [Backend Deployed Link](https://onbox-1.onrender.com)
 
 ## Technologies Used
 
