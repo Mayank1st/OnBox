@@ -148,7 +148,7 @@ Content-Type: application/json
 
 ## Screen Recording
 
-You can watch a [screen recording of the app here](https://screen-recording-link.com). The video showcases all the major functionalities of the application, including:
+You can watch a [screen recording of the app here](https://drive.google.com/file/d/191Vb_DKEEV5Q6sFBcOCWGLUFvaG11t2l/view?usp=sharing). The video showcases all the major functionalities of the application, including:
 
 - Signing up and logging in
 - Interacting with the API
